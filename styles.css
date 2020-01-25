@@ -1,0 +1,20 @@
+#customers {
+    display: flex;
+    list-style-type: none;
+    flex-flow: wrap column;
+}
+
+#customers li {
+    border-radius: 1rem;
+    margin: 1rem;
+    padding: 1rem;
+    border: solid 1px black;
+    width: calc(100% / 3 - 2rem);
+    display: flex;
+    justify-content: center;
+    background-color: linen;
+}
+
+#customers .vip {
+    background-color: green;
+}
