@@ -1,13 +1,89 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+  <head>
+    <style>
+        body {
+          font-family: sans-serif;
+        }
 
-    <body>
-       <h1>Acme Customers VIP</h1> 
+        #customers {
+          list-style-type: none;
+          padding: 0;
+        }
 
-       <ul id="customers"></ul>
+
+        #customers li {
+          padding: 1rem;
+          margin-bottom: 1rem;
+          background-color: linen;
+        }
+
+        #customers li.vip {
+          background-color: seaGreen;
+          color: white;
+        }
+
+        #legend {
+          border: solid 1px black;
+          display: flex;
+          align-items: center;
+          width: 200px;
+        }
+
+        #legend > * {
+          margin: 1rem;
+        }
+
+        #vip-swatch {
+          background-color: seaGreen;
+          width: 50px;
+          height: 50px;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>Acme Customers VIP</h1>
+    <ul id='customers'>
+    </ul>
+    <div id='legend'>
+      <label>VIP</label>
+      <div id='vip-swatch'></div>
+    </div>
+
+  <script>
+      const customers = [
+      { id: 1, name: 'moe', email: 'moe@gmail.com', isVIP: true, dateJoined: '07/05/2018'},
+      { id: 2, name: 'larry', isVIP: true, email: 'larry@gmail.com', dateJoined: '01/01/2019'},
+      { id: 4, name: 'shep', email: 'shep@gmail.com', dateJoined: '03/19/2000'},
+     ];
+
+    customers.forEach(customer =>{
+        customer.dateJoined = new Date (customer.dateJoined)
+    })
+    customers.sort((a,b)=>b.dateJoined - a.dateJoined)
+    
+    const list = document.querySelector('#customers');
+   
+    
+    const render = ()=> {
+
         
-        <script src="script.js"></script>
-    </body>
+      let html = customers.sort()
+          .map( customer => {
+              const diff =  new Date() - customer.dateJoined;
+              const oneYear = 31556952000
+        return `
+          <li class='${ customer.isVIP ? 'vip': ''}'>
+            ${ customer.name } Joined On ${ customer.dateJoined.toLocaleDateString()} And has been a member for ${diff/oneYear} years
+          </li>
+        `;
+      }).join('');
+      list.innerHTML = html;
+    };
+
+    render();
+
+    
+  </script>
+
+  </body>
 </html>
