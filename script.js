@@ -33,6 +33,24 @@
 
 // render();
 
+// const form = document.querySelector('form')
+// const h1 = document.querySelector('h1')
+// const span = document.querySelector('span')
+// const clearButton = form.querySelector('.clear')
+// clearButton.addEventListener('click', (ev)=>{
+//   ev.stopPropagation();
+//   console.log('clicked')
+// })
+// form.addEventListener('submit', ev =>{
+//   ev.preventDefault()
+//   const emailInput = form.querySelector('[name="email"]')
+//   console.log(emailInput.value)
+//   const dateInput = form.querySelector('[name="date"]')
+//   const date = new Date(dateInput.value)
+//   const diff = new Date() - date;
+//   const msInYear = 1000*60*60*24*365
+//   // console.log(diff/msInYear).toFixed(1);
+// })
 
 
 const customers = [
@@ -44,6 +62,11 @@ const customers = [
 
 const list = document.querySelector('#customers');
 
+const create = document.querySelector('button');
+
+create.addEventListener('submit', (ev) => {
+  
+})
 
 const render = ()=> {
   let html = customers.map( customer => {

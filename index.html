@@ -42,6 +42,12 @@
   </head>
   <body>
     <h1>Acme Customers VIP</h1>
+    <form>
+      <input name="Name" placeholder="Name">
+      <input name="Date" placeholder="Date">
+      <span>VIP</span><input type="checkbox">
+      <button>Create</button>
+    </form>
     <ul id='customers'>
     </ul>
     <div id='legend'>
@@ -62,18 +68,41 @@
     customers.sort((a,b)=>b.dateJoined - a.dateJoined)
     
     const list = document.querySelector('#customers');
-   
+    
+    const form = document.querySelector('form');
+    
+    const create = document.querySelector('button');
+    
+    create.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      
+      const nameInput = document.querySelector('[name = "Name"]');
+
+      const dateInput = document.querySelector('[name = "Date"]');
+
+      const date = new Date(dateInput.value)
+
+      const vipInput = document.querySelector('[type = "checkbox"]')
+
+      customers.push({ id: 0, name: nameInput.value, email: 'none', isVIP: (vipInput.checked ? true: false), dateJoined: date});
+      
+      console.log(customers);
+
+      render();
+    })
+    
+    console.log(customers);
     
     const render = ()=> {
 
         
-      let html = customers.sort()
+      let html = customers.sort((a, b) => a.dateJoined - b.dateJoined)
           .map( customer => {
               const diff =  new Date() - customer.dateJoined;
               const oneYear = 31556952000
         return `
           <li class='${ customer.isVIP ? 'vip': ''}'>
-            ${ customer.name } Joined On ${ customer.dateJoined.toLocaleDateString()} And has been a member for ${diff/oneYear} years
+            ${ customer.name } Joined On ${ (customer.dateJoined).toLocaleDateString()} And has been a member for ${(diff/oneYear).toFixed(1)} years
           </li>
         `;
       }).join('');
